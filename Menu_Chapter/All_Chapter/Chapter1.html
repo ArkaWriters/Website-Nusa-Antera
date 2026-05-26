@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1 - 7 Kilauan Pelangi</title>
+    <link rel="stylesheet" href="../Buku_Cerita/Halaman.css">
+
+    <style>
+        .btn-saweria {
+            display: inline-block;
+            background: #ff6b6b;
+            color: #1a1a1a !important;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: 0.2s;
+        }
+        .btn-saweria:hover {
+            background: #ffd93d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+        .divider {
+            text-align: center;
+            font-size: 2rem;
+            color: #c9a959;
+            margin: 40px 0;
+            letter-spacing: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../Novel7.html" class="back-link">← Kembali ke Menu Chapter</a>
+
+        <div class="header-box">
+            <div class="chapter-image">
+                <img src="Sampul_Novel_7_Kesatria_Pelangi.png" alt="Sampul Novel 7 Kilauan Pelangi">
+            </div>
+            <div class="header-text">
+                <h1>7 Kilauan Pelangi</h1>
+                <p>Petualangan Zia Putri di Pandawa Akademi dimulai di sini. Bersiaplah untuk 7 kristal, 7 kesatria, dan 7 rahasia yang mengubah segalanya.</p>
+            </div>
+        </div>
+
+        <!-- Navigasi atas -->
+        <nav class="chapter-nav">
+            <ul>
+                <li><a href="Prolog.html">← Prolog</a></li>
+                <li><a href="../../Nusa_Antera.html">Daftar Isi</a></li>
+                <li><a href="Chapter2.html">Chapter2 →</a></li>
+            </ul>
+        </nav>
+
+        <div class="chapter-box">
+            <!-- Judul Chapter -->
+            <h2 id="Chapter1">Chapter 1: Teman Sekamar & Mimpi Buruk</h2>
+
+            <!-- TTS BOX KANG ARKA -->
+            <div class="tts-box">
+                <div class="tts-header">
+                    <span>🔊 Dengerin Bareng Kang Arka</span>
+                </div>
+                <div class="tts-controls">
+                    <button onclick="playText()" class="tts-btn">▶ Play</button>
+                    <button onclick="pauseText()" class="tts-btn">⏸ Pause</button>
+                    <button onclick="stopText()" class="tts-btn">⏹ Stop</button>
+                    
+                    <div class="tts-option">
+                        <label>Speed:</label>
+                        <input type="range" id="speed" min="0.5" max="2" step="0.1" value="1">
+                    </div>
+                    
+                    <div class="tts-option">
+                        <label>Suara:</label>
+                        <select id="voiceSelect"></select>
+                    </div>
+                </div>
+            </div>
+        <br>
+        <p style="color:#888; font-size:12px; margin:-20px 0 20px 0;">
+        *Untuk suara Bahasa Indonesia terbaik, buka di Chrome Android Atau Cari Suara Indonesia
+        </p>
+
+            <!-- Isi Chapter + ID BUAT TTS -->
+            <div class="chapter-content" id="chapterText">
+                <p>"Eh, T-Tunggu dulu aku kan bukan orang sini. Jadi aku harus tinggal dimana dong?"</p>
+
+                <p>Arghh. Masa aku harus jadi gembel sih!? Ucapku sambil panik.</p>
+
+                <p>Nirmala tertawa dan berkata, "Kamu tuh emang lucu ya. Ini kan asrama, jadi kamu ya pasti tinggal di sini lah."</p>
+
+                <p>Aku melongo, "Oh jadi ini asrama ya? Kirain teh bukan. Hah untung deh kalo gitu mah."</p>
+
+                <p>"Semua siswa baru diharapkan segera pergi ke asrama untuk mengambil kunci kamar. CEPAT!" Ucap anggota OSIS bertanduk merah.</p>
+
+                <p>Semua siswa bergegas pergi ke asrama. Di sana kami berbaris menunggu giliran untuk mengambil kunci.</p>
+
+                <div class="divider">***</div>
+
+                <p>Saat aku sampai di pintu gerbang asrama aku terbelalak melihat asrama yang besar dan mewah.</p>
+
+                <div class="chapter-image">
+                    <img src="Asrama1.png" alt="Asrama Pandawa Akademi">
+                    <p class="caption">"Apa-apaan ini? Ini asrama apa kastil?!"</p>
+                </div>
+
+                <p>"Wah aku gak nyangka asramanya bakal sebesar ini," ucap Nirmala kagum.</p>
+
+                <p>"Hey Nirmala ayo kita segera masuk. Antriannya takut nanti nggak kebagian kamar," ucapku sambil menarik Nirmala.</p>
+
+                <p>"Yah antriannya udah keburu panjang."</p>
+
+                <p>"Ah tenang lah, setidaknya kita bukan yang terakhir," ucap Nirmala.</p>
+
+                <p>Aku bertanya pada Nirmala, "Hey ini satu kamar satu orang atau satu kamar diisi dua orang atau lebih?"</p>
+
+                <p>Nirmala menjawab, "Aku denger sih sekamar itu diisi dua orang. Emang kenapa?"</p>
+
+                <p>"Enggak, aku hanya takut kalo misal nanti aku dan teman sekamarku tidak akur."</p>
+
+                <p>Nirmala menepuk punggungku, "Hey ayolah, kan ada aku. Kita akan menjadi sahabat sekamar terhebat sepanjang sejarah sekolah."</p>
+
+                <p>"Lah emang bisa ya kita milih teman sekamar?" tanyaku.</p>
+
+                <p>Nirmala nyengir, nonjok pelan lenganku. "Ya bisa lah! Nanti kita pasang muka melas aja ke Ibu Asrama. Bilang kita nggak bisa pisah. Kita kan udah kayak sodara, Zi. Masak iya dipisah?"</p>
+
+                <p>Aku menarik napas, "Moga aja bisa deh."</p>
+
+                <div class="divider">***</div>
+
+                <p>Setelah beberapa saat menunggu akhirnya saatnya aku dan Nirmala mengambil kunci kamar.</p>
+
+                <p>"Permisi bu, apakah masih ada kamar kosong buat dua orang?" tanya Nirmala.</p>
+
+                <p>"Oh tentu saja nak. Ini kunci kamar nomor 168," ucap pengurus asrama.</p>
+
+                <p>"Loh langsung dikasih? Kirain nanti kita akan dipilihin teman sekamar."</p>
+
+                <p>Penjaga asrama menoleh, "Oh tentu tidak sayang. Semua orang bebas memilih teman sekamarnya asalkan jangan berbeda kelamin."</p>
+
+                <p>"Liat kan kita sudah jadi teman sekamar sekarang," Nirmala tersenyum.</p>
+
+                <p>"Wow ternyata emang bisa gitu ya."</p>
+
+                <p>Nirmala tersenyum lalu langsung berlari, "Hey Zia ayok cepat sini!"</p>
+
+                <p>"Hey sabar dong, tunggu aku."</p>
+
+                <p>"Dia emang selalu bersemangat begini ya," ucapku di dalam hati.</p>
+
+                <p>Kami menyusuri lorong-lorong untuk mencari kamar kami.</p>
+
+                <div class="divider">***</div>
+
+                <p>Setelah beberapa lama mencari akhirnya kita menemukan kamar yang sesuai.</p>
+
+                <p>"Ini kan kamarnya?" tanyaku.</p>
+
+                <p>"Ah iya ini kamarnya. Liat nomor 168, sama kan."</p>
+
+                <p>Nirmala menarik tanganku, "Ayo kita masuk."</p>
+
+                <p>Kami berdua terbelalak melihat betapa bagusnya kamar di asrama ini. Nirmala langsung berbaring di tempat tidur.</p>
+
+                <p>"Hey Nir, kamu udah mau tidur? Ini kan masih sore?" kataku.</p>
+
+                <p>Dia tersenyum, "Ya enggak lah. Aku cuma mau istirahat sebentar dong. Cape tau dari pagi berbaris di lapangan, emang kamu enggak?"</p>
+
+                <p>"Cape sih, cuma kalo tidur jam segini takutnya nanti tengah malam aku kebangun dan nggak bisa tidur lagi."</p>
+
+                <p>"Ya jangan tidur lah, berbaring aja rilek dikit."</p>
+
+                <p>Aku menarik napas, "Nanti aja deh. Toh aku harus membereskan kamar ini dulu sedikit biar tidak terlalu berdebu."</p>
+
+                <p>"Kamu mau membantuku tidak?" Saat aku menengok ternyata Nirmala sudah tidur pulas.</p>
+
+                <p>Aku melongo, "Hah katanya dia cuma mau tiduran, eh ternyata tidur beneran."</p>
+
+                <p>Aku beres-beres kamar sebentar. Setelah beres membersihkan kamar aku mulai merasa kelelahan. Aku langsung tersungkur ke kasur lalu tanpa sadar sudah tertidur pulas.</p>
+
+                <div class="divider">***</div>
+
+                <p>Di dalam mimpi aku mendengar suara. Suara itu menggema. Suaranya seperti sedang memanggilku.</p>
+
+                <p><em>"Temukan 7 kristal pelangi. Selamatkan kerajaan Hastinapura dari kekeringan dan bongkar rencana busuk mereka."</em></p>
+
+                <p><em>"Tunggu siapa kamu? Hey apa yang kamu maksud?"</em></p>
+
+                <p><em>"Angin akan selalu menuntutmu untuk memenuhi takdirmu, Zia Putri."</em></p>
+
+                <div class="divider">***</div>
+
+                <p>Sebelum aku mendapatkan penjelasan dari suara itu, aku terbangun dari mimpiku. Aku melihat jam, ternyata ini tengah malam.</p>
+
+                <p>Aku melongo melihat Nirmala masih tidur pulas padahal dia tidurnya jam 3 sore.</p>
+
+                <p>"Aduh mules banget. Hey Nir-Nirmala temenin aku ke kamar mandi dong, ayo," aku mencoba membangun Nirmala.</p>
+
+                <p>"Mmm... sate padang... nambah dong, Bang... dua tusuk lagi," ucap Nirmala sambil mengigau.</p>
+
+                <p>"Hah ini orang kalo udah tidur susah banget ya buat dibangunin."</p>
+
+                <p>Karena Nirmala tidak kunjung bangun, aku terpaksa pergi ke WC sendirian. Melewati koridor asrama yang gelap dan sunyi. Saat berjalan aku merasa ada sesuatu yang mengintaiku. Samar-samar aku melihat bayangan gelap berseliweran di lorong.</p>
+
+                <p>"Hey kau yang di sana, menunduk!" Suaranya lantang dan tegas.</p>
+
+                <div class="divider">***</div>
+
+                <p><em>Siapa yang teriak? Bayangan apa yang ngintai Zia? Lanjut Chapter 2 biar nggak penasaran</em> <strong>👇</strong></p>
+                <a href="https://saweria.co/ArkaWriters1" target="_blank" class="btn-saweria">Traktir Kopi Biar Lanjut ☕</a>
+            </div>
+        </div>
+
+        <!-- Navigasi bawah -->
+        <nav class="chapter-nav">
+            <ul>
+                <li><a href="Prolog.html">← Prolog</a></li>
+                <li><a href="../../Nusa_Antera.html">Daftar Isi</a></li>
+                <li><a href="Chapter2.html">Chapter2 →</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- JANGAN LUPA PANGGIL SCRIPT.JS BIAR TTS JALAN -->
+    <script src="../Buku_Cerita/script.js"></script>
+</body>
+</html>

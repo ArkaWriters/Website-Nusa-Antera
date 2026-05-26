@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3 - 7 Kilauan Pelangi</title>
+    <link rel="stylesheet" href="../Buku_Cerita/Halaman.css">
+
+    <style>
+        .btn-saweria {
+            display: inline-block;
+            background: #ff6b6b;
+            color: #1a1a1a !important;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: 0.2s;
+        }
+        .btn-saweria:hover {
+            background: #ffd93d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+        .divider {
+            text-align: center;
+            font-size: 2rem;
+            color: #c9a959;
+            margin: 40px 0;
+            letter-spacing: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../Novel7.html" class="back-link">← Kembali ke Menu Chapter</a>
+
+        <div class="header-box">
+            <div class="chapter-image">
+                <img src="Sampul_Novel_7_Kesatria_Pelangi.png" alt="Sampul Novel 7 Kilauan Pelangi">
+            </div>
+            <div class="header-text">
+                <h1>7 Kilauan Pelangi</h1>
+                <p>Petualangan Zia Putri di Pandawa Akademi dimulai di sini. Bersiaplah untuk 7 kristal, 7 kesatria, dan 7 rahasia yang mengubah segalanya.</p>
+            </div>
+        </div>
+
+        <!-- Navigasi atas -->
+        <nav class="chapter-nav">
+            <ul>
+                <li><a href="Chapter2.html">← Chapter2</a></li>
+                <li><a href="../../Nusa_Antera.html">Daftar Isi</a></li>
+                <li><a href="Chapter4.html">Chapter4 →</a></li>
+            </ul>
+        </nav>
+
+        <div class="chapter-box">
+            <!-- Judul Chapter -->
+            <h2 id="Chapter3">Chapter 3: Hukuman Kebun & Si Kembar Sri-Sari</h2>
+
+            <!-- TTS BOX KANG ARKA -->
+            <div class="tts-box">
+                <div class="tts-header">
+                    <span>🔊 Dengerin Bareng Kang Arka</span>
+                </div>
+                <div class="tts-controls">
+                    <button onclick="playText()" class="tts-btn">▶ Play</button>
+                    <button onclick="pauseText()" class="tts-btn">⏸ Pause</button>
+                    <button onclick="stopText()" class="tts-btn">⏹ Stop</button>
+                    
+                    <div class="tts-option">
+                        <label>Speed:</label>
+                        <input type="range" id="speed" min="0.5" max="2" step="0.1" value="1">
+                    </div>
+                    
+                    <div class="tts-option">
+                        <label>Suara:</label>
+                        <select id="voiceSelect"></select>
+                    </div>
+                </div>
+            </div>
+        <br>
+        <p style="color:#888; font-size:12px; margin:-20px 0 20px 0;">
+        *Untuk suara Bahasa Indonesia terbaik, buka di Chrome Android Atau Cari Suara Indonesia
+        </p>
+            <!-- Isi Chapter + ID BUAT TTS -->
+            <div class="chapter-content" id="chapterText">
+                <p><em>"Angkat tangan dan jangan melawan!"</em> Teriak salah satu anggota OSIS.</p>
+                
+                <p>Aku mengangkat kedua tanganku. Jantungku berdebar kencang saat itu. Semua murid keluar dari kamar mereka menatapku seolah aku sudah melakukan sebuah kejahatan.</p>
+                
+                <p><em>"Kapten Naratama, kita apakan wanita ini? Kita interogasi atau langsung kurung saja dia di ruang referensi?"</em></p>
+                
+                <p><em>"Serahkan dia kepadaku,"</em> ucap Naratama.</p>
+                
+                <p><em>"Jadi pria itu bernama Naratama ya,"</em> gumamku di dalam hati.</p>
+                
+                <p>Naratama maju dan menatapku dengan tatapan yang tajam. <em>"Apa yang kau lakukan membuat keributan di asrama tengah malam begini, hah?"</em></p>
+                
+                <p><em>"Aku tadi diserang oleh sekelompok bayangan hitam. Lalu pria ini datang menyelamatkanku dan kami berdua bekerja sama untuk menyingkirkan mereka."</em></p>
+                
+                <p>Naratama menarik napas. <em>"Pria yang mana, hah? Di belakangmu tidak ada siapa-siapa. Lihatlah!"</em></p>
+                
+                <p>Aku membalikkan tubuhku. Lalu aku terkejut karena ternyata benar, pria misterius tersebut sudah menghilang entah kemana.</p>
+                
+                <p>Dalam kepanikan aku mencoba menjelaskan pada Naratama, <em>"S-sumpah aku gak bohong! Tadi dia ada di belakangku!"</em></p>
+                
+                <p>Dilihat dari ekspresinya, sepertinya dia sama sekali tidak percaya padaku.</p>
+                
+                <p><em>"Zia Putri, besok siang temui aku di kebun belakang sekolah,"</em> ucap Naratama tegas.</p>
+                
+                <p>Tanpa dia menjelaskan apapun, aku sudah yakin aku pasti akan diberi hukuman. Aku kembali ke kamarku.</p>
+                
+                <p>Lalu Nirmala bertanya padaku, <em>"Hey Zia, apa yang terjadi?"</em></p>
+                
+                <p>Aku langsung tersungkur ke tempat tidur. <em>"Besok saja deh aku ceritanya. Aku udah capek banget hari ini."</em></p>
+                
+                <p><em>"Oh yaudah kalo gitu,"</em> ucap Nirmala.</p>
+                
+                <p><em>"Hah, kenapa hal ini selalu terjadi padaku?"</em> Gumamku dalam hati.</p>
+                
+                <div class="divider">***</div>
+                
+                <p>Keesokan harinya, pukul 09.30, Naratama sudah berdiri di kebun belakang sekolah.</p>
+                
+                <p><em>"Bagus, kau datang tepat waktu. Sekarang tugasmu adalah membersihkan kebun belakang sekolah ini. Kau mengerti?"</em></p>
+                
+                <p>Aku menghembuskan nafas. <em>"Iya, aku ngerti!"</em></p>
+
+                <div class="chapter-image">
+                    <img src="Chapter3_Naratama.png" alt="Naratama di Kebun Belakang">
+                    <p class="caption">Naratama, Kapten OSIS bertanduk merah</p>
+                </div>
+                
+                <p>Dengan nada kesal aku berkata, <em>"Iya iya aku ngerti, bawel amat sih jadi orang."</em></p>
+                
+                <p>Beberapa menit berlalu, cuacanya semakin panas.</p>
+                
+                <p><em>"Haduh, panas banget. Sialan. Kalo aku ketemu pria itu lagi, aku pasti akan memberikan dia sebuah pelajaran. Enak aja cuma aku yang kena getahnya."</em></p>
+                
+                <p>Tiba-tiba tanah di sebelahku retak. Akar keluar dari tanah, melingkar cepat di pergelangan tanganku. Ujungnya runcing, meninggalkan goresan merah di tanganku.</p>
+
+                <div class="chapter-image">
+                    <img src="Chapter3_Bawang_Putih.png" alt="Sari si Bawang Putih">
+                    <p class="caption">Sari, gadis berkebaya putih penjinak akar</p>
+                </div>
+                
+                <p><em>"Eh! Maaf, maaf!"</em> Seorang gadis berkebaya putih datang menghampiriku. Dia mengulurkan tangannya dan seketika itu juga akar yang mengikat tanganku langsung lepas. <em>"Akar Kak Sri emang galak kalo ada orang asing datang ke kebun. Kayaknya kamu kecapean, sini biar aku bantu cabut rumputnya."</em></p>
+                
+                <div class="auman-box">
+                    <p><strong>"SARI!"</strong></p>
+                </div>
+                
+                <p>Bentakan itu membuat bulu kudukku berdiri. Gadis berkebaya merah muncul, matanya menatap ke arah kami berdua. <em>"Lepasin akar lo. Udah berapa kali gue bilang jangan ikut campur urusan orang lain!"</em></p>
+                
+                <p>Sari cemberut. <em>"Emangnya kenapa, Sri? Kok kamu selalu ngatur-ngatur aku sih? Dia lagi susah, wajar dong kalo aku ngebantu dia!"</em></p>
+                
+                <p><em>"UDAH CUKUP, SARI! Kembali ke kantin. Sebentar lagi waktunya makan siang."</em></p>
+                
+                <p>Sari menghela nafas. <em>"Maaf ya, aku cuma bisa bantu segini aja."</em></p>
+                
+                <p><em>"Oh ya gak papa kok. Justru aku yang harus bilang makasih ke kamu."</em></p>
+                
+                <p>Lalu mereka pun pergi meninggalkan ku sendiri di halaman belakang sekolah. Tak lama kemudian Naratama kembali.</p>
+                
+                <p>Naratama terkejut. <em>"Waw, aku gak nyangka kamu sehebat ini dalam hal bersih-bersih."</em></p>
+                
+                <p><em>"Gimana, udah beres kan hukumanku? Aku udah boleh pergi sekarang kan?"</em></p>
+                
+                <p>Naratama mengangguk. <em>"Ya, kau bisa pergi sekarang."</em></p>
+                
+                <p>Aku menghembuskan nafas lega. <em>"Akhirnya beres juga."</em></p>
+                
+                <div class="divider">***</div>
+                
+                <p>Beberapa saat kemudian aku kembali ke asrama dan melihat penjaga asrama. Aku jadi ngerasa gak enak atas apa yang terjadi kemarin malam.</p>
+                
+                <p>Lalu ibu penjaga asrama menoleh dan melihat ke arahku. <em>"Halo Dek Manis, ada apa? Ko keliatannya capek banget?"</em></p>
+                
+                <p><em>"Eh iya, Bi. Tadi abis dihukum sama OSIS disuruh bersihin kebun belakang sekolah."</em></p>
+                
+                <p>Aku menundukkan kepala. <em>"Maaf ya, Bi, soal yang terjadi tadi malam."</em></p>
+                
+                <p>Dia tersenyum ramah padaku. <em>"Gak papa, Dek Manis. Jujur, tragedi seperti itu sudah sering terjadi. Semenjak kekeringan melanda daerah ini..."</em></p>
+                
+                <p>Di perjalanan menuju kamarku, aku masih memikirkan apa yang dikatakan oleh ibu tadi. <em>"Sebenarnya apa yang sedang terjadi di sekolah ini? Ah, sudahlah. Aku lagi capek gini, udah gaada tenaga lagi buat mikirin yang begituan."</em></p>
+                
+                <p>Sesampainya di kamar, aku langsung tersungkur ke kasurku. Aku sudah sangat kelelahan hingga secara tidak sadar aku langsung tertidur pulas.</p>
+
+                <div class="divider">***</div>
+
+                <p><em>Naratama OSIS galak, tapi kayaknya nggak jahat. Sri-Sari kembar kebun belakang? Dan "kekeringan melanda daerah ini" - nyambung sama ramalan Raksasa Pembawa Bencana!</em> <strong>LANJUT CHAPTER 4 👇</strong></p>
+                <a href="https://saweria.co/ArkaWriters1" target="_blank" class="btn-saweria">Traktir Kopi Biar Melek ☕</a>
+            </div>
+        </div>
+
+        <!-- Navigasi bawah -->
+        <nav class="chapter-nav">
+            <ul>
+                <li><a href="Chapter2.html">← Chapter2</a></li>
+                <li><a href="../../Nusa_Antera.html">Daftar Isi</a></li>
+                <li><a href="Chapter4.html">Chapter4 →</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script src="../Buku_Cerita/script.js"></script>
+</body>
+</html>

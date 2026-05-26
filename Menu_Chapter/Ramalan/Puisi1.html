@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syair Tujuh Permata - Nusa Antera</title>
+    <link rel="stylesheet" href="../Buku_Cerita/Halaman.css">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Merriweather:ital,wght@0,300;1,300&display=swap');
+
+    body {
+        background: #0a0a0f;
+        background-image:
+            radial-gradient(circle at 20% 50%, #1a1a2e 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, #16213e 0%, transparent 50%);
+        color: #e8e8e8;
+        font-family: 'Merriweather', serif;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.8;
+        min-height: 100vh;
+    }
+
+   .container {
+        max-width: 900px;
+        margin: 0 auto 40px auto;
+    }
+
+    /* CONTAINER KE-2 GUE BIKIN FLEX BIAR SEJAJAR */
+   .container:nth-of-type(2) {
+        display: flex;
+        align-items: flex-start;
+        gap: 25px;
+        background-color: rgba(31, 31, 31, 0.7);
+        padding: 25px;
+        margin: 30px auto;
+        border-left: 4px solid #FFD700;
+        border-radius: 8px;
+        box-shadow: 0 0 40px rgba(255, 215, 0, 0.1),
+                    0 4px 12px rgba(0,0,0,0.3);
+        backdrop-filter: blur(10px);
+    }
+
+   .header-box {
+        flex-shrink: 0;
+    }
+
+   .header-box img {
+        width: 180px;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 6px;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        display: block;
+    }
+
+   .header-text {
+        flex: 1;
+        padding-top: 10px;
+    }
+
+   .header-text h1 {
+        margin: 0 0 10px 0;
+        color: #FFD700;
+        font-family: 'Cinzel', serif;
+        font-size: 2em;
+        letter-spacing: 2px;
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    }
+
+   .header-text.subtitle {
+        color: #a8a8b3;
+        font-style: italic;
+        margin: 0;
+    }
+
+    /* SYAIR BOX */
+   .syair-box {
+        background-color: rgba(20, 20, 35, 0.7);
+        padding: 50px 40px;
+        border-radius: 8px;
+        margin: 30px 0;
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        box-shadow: 0 0 40px rgba(255, 215, 0, 0.1),
+                    inset 0 0 60px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+    }
+
+   .syair-judul {
+        font-family: 'Cinzel', serif;
+        text-align: center;
+        color: #FFD700;
+        font-size: 2.2em;
+        margin-bottom: 10px;
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        letter-spacing: 3px;
+    }
+
+   .bait-syair {
+        margin-bottom: 40px;
+        text-align: center;
+        font-size: 1.15em;
+        opacity: 0;
+        animation: fadeIn 1.5s forwards;
+    }
+
+   .bait-syair:nth-of-type(1) { animation-delay: 0.3s; }
+   .bait-syair:nth-of-type(2) { animation-delay: 0.8s; }
+   .bait-syair:nth-of-type(3) { animation-delay: 1.3s; }
+   .bait-syair:nth-of-type(4) { animation-delay: 1.8s; }
+   .bait-syair:nth-of-type(5) { animation-delay: 2.3s; }
+
+   .bait-syair p {
+        margin: 12px 0;
+        color: #d4d4d4;
+        line-height: 2;
+    }
+
+   .highlight-permata {
+        color: #FFD700;
+        font-weight: bold;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+    }
+
+   .divider-pelangi {
+        width: 150px;
+        height: 2px;
+        background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3);
+        margin: 30px auto;
+        opacity: 0.7;
+    }
+
+   .back-btn {
+        display: inline-block;
+        margin: 10px 10px 10px 0;
+        padding: 12px 30px;
+        background: transparent;
+        border: 1px solid #FFD700;
+        color: #FFD700;
+        text-decoration: none;
+        border-radius: 4px;
+        font-family: 'Cinzel', serif;
+        letter-spacing: 2px;
+        transition: all 0.3s ease;
+    }
+
+   .back-btn:hover {
+        background: #FFD700;
+        color: #0a0a0f;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    }
+
+    @keyframes fadeIn {
+        to { opacity: 1; transform: translateY(0); }
+        from { opacity: 0; transform: translateY(20px); }
+    }
+
+    /* RESPONSIVE HP - AUTO ATAS BAWAH */
+    @media (max-width: 700px) {
+       .container:nth-of-type(2) {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 15px;
+        }
+       .header-box img {
+            width: 160px;
+            height: 220px;
+        }
+       .header-text {
+            padding-top: 0;
+        }
+       .header-text h1 {
+            font-size: 1.7em;
+        }
+       .syair-box { padding: 30px 20px; }
+       .syair-judul { font-size: 1.8em; }
+       .bait-syair { font-size: 1.05em; }
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <a href="../Puisi.html" class="back-btn">Kembali ke Menu Puisi</a>
+    </div>
+
+    <div class="container">
+        <div class="header-box">
+            <img src="Sampul_Novel_7_Kesatria_Pelangi.png" alt="Sampul Novel 7 Kilauan Pelangi">
+        </div>
+
+        <div class="header-text">
+            <h1>SYAIR TUJUH PERMATA</h1>
+            <p class="subtitle">Nusa Antera - Kisah Para Satria</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="syair-box">
+            <h2 class="syair-judul">TUJUH CAHAYA</h2>
+            
+            <div class="bait-syair">
+                <p>Tujuh bangsa tujuh warna cahaya</p>
+                <p>Tujuh permata menerangi dunia</p>
+                <p>Tujuh jiwa milik para satria</p>
+                <p>Tujuh satria pembawa cahaya</p>
+            </div>
+            
+            <div class="divider-pelangi"></div>
+            
+            <div class="bait-syair">
+                <p>Bangkitlah segera halau bencana</p>
+                <p>Api dunia membakar segalanya</p>
+                <p>Bersatulah semua oh para satria</p>
+                <p>Tujuh warna warnai dunia</p>
+            </div>
+            
+            <div class="divider-pelangi"></div>
+            
+            <div class="bait-syair">
+                <p><span class="highlight-permata">Jingga</span> permata kesetiaan satria</p>
+                <p><span class="highlight-permata">Kuning</span> permata kesederhanaan satria</p>
+                <p><span class="highlight-permata">Ungu</span> permata oh kebenaran dunia</p>
+                <p><span class="highlight-permata">Hijau</span> permata bukti cinta satria</p>
+            </div>
+            
+            <div class="divider-pelangi"></div>
+            
+            <div class="bait-syair">
+                <p>Bangkitlah segera halau bencana</p>
+                <p>Hilang cahaya runtuh segalanya</p>
+                <p>Bersatulah semua oh para satria</p>
+                <p>Air mata merungkai segalanya</p>
+            </div>
+            
+            <div class="divider-pelangi"></div>
+            
+            <div class="bait-syair">
+                <p><span class="highlight-permata">Nila</span> permata terima apa adanya</p>
+                <p><span class="highlight-permata">Biru</span> permata kejujuran satria</p>
+                <p><span class="highlight-permata">Merah</span> membara membakar di jiwa</p>
+                <p>Tujuh cahaya bukti jiwa satria</p>
+            </div>
+
+            <div class="bait-syair">
+    <p>Tamatlah sudah syair permata</p>
+    <p>Karangan Zi untuk Nusa Antera</p>
+    <p>Semoga menjadi pedoman satria</p>
+    <p>Membawa cahaya sepanjang masa</p>
+</div>
+
+        </div>
+
+        <a href="../../index.html" class="back-btn">Daftar Isi</a>
+    </div>
+</body>
+</html>

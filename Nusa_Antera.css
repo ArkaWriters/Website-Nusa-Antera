@@ -1,0 +1,196 @@
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #2b2b2b;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        h1 { 
+    color: #ff6b6b; 
+    text-shadow: 0 0 8px rgba(255, 107, 107, 0.4);
+}
+
+.karya-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.karya-item {
+    display: flex;
+    gap: 20px;
+    background: #1f1f1f;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #ff6b6b;
+    transition: 0.3s;
+}
+
+.karya-item:hover {
+    background: #262626;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.2);
+}
+
+.karya-cover {
+    width: 120px;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+    box-shadow: 0 0 12px rgba(0,0,0,0.6);
+}
+
+.karya-info {
+    flex: 1;
+}
+
+.karya-info h3 {
+    margin: 0 0 8px 0;
+    color: #ff6b6b;
+    font-size: 22px;
+    text-shadow: 0 0 6px rgba(255, 107, 107, 0.3);
+}
+
+.karya-info .meta {
+    color: #aaa;
+    font-size: 13px;
+    margin: 0 0 10px 0;
+}
+
+.karya-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.karya-links a {
+    background: #2b2b2b;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    border: 1px solid #444;
+    transition: 0.2s;
+    text-decoration: none;
+}
+
+.karya-links a:hover {
+    background: #4ecdc4;
+    color: #1a1a1a;
+    border-color: #4ecdc4;
+}
+
+/* Biar enak di HP */
+@media (max-width: 600px) {
+   .karya-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+   .karya-cover {
+        width: 100px;
+        height: 140px;
+    }
+}
+.highlight {
+    color: #ffd93d;
+    text-shadow: 0 0 5px rgba(255, 217, 61, 0.5);
+}
+/* Bagian Tentang Aku */
+.tentang-wrapper {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.tentang-gambar {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex-shrink: 0;
+    box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    border: 2px solid #ff6b6b;
+}
+
+.tentang-teks {
+    flex: 1;
+}
+
+.tentang-teks p {
+    margin: 0 0 12px 0;
+}
+
+.btn-saweria {
+    display: inline-block;
+    background: #ff6b6b;
+    color: #1a1a1a !important;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+.btn-saweria:hover {
+    background: #ffd93d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+}
+
+/* Biar rapi di HP: gambar di atas, teks di bawah */
+@media (max-width: 600px) {
+    .tentang-wrapper {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .tentang-gambar {
+        width: 120px;
+        height: 120px;
+    }
+}
+/* Biar bagus di HP */
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 95%;
+    padding: 10px;
+  }
+  
+  .chapter-image img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .header-text h1 {
+    font-size: 24px;
+  }
+  
+  .chapter-content p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+@media only screen and (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+  h1 {
+    font-size: 26px;
+  }
+  .karya-info h3 {
+    font-size: 18px;
+  }
+}
