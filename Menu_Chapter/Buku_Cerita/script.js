@@ -1,77 +1,93 @@
-const synth = window.speechSynthesis;
-const speedInput = document.getElementById("speed");
-const voiceSelect = document.getElementById("voiceSelect");
-let voices = [];
-let utterance;
+let audioPlayer = new Audio();
+let isPlaying = false;
+let isPaused = false;
 
-// Ambil semua teks dari chapter-content otomatis
-function getChapterText() {
-    const content = document.getElementById("chapterText");
-    return content.innerText; // Ambil semua teks <p> di dalamnya
-}
+// Suara Edge Indonesia
+const EDGE_VOICES = {
+    "id-ID-ArdiNeural": "Ardi - Pria",
+    "id-ID-GadisNeural": "Gadis - Wanita"
+};
 
-function loadVoices() {
-    voices = synth.getVoices();
-    voiceSelect.innerHTML = "";
+function populateVoices() {
+    const voiceSelect = document.getElementById('voiceSelect');
+    voiceSelect.innerHTML = '';
     
-    const indoVoices = voices.filter(voice => voice.lang === 'id-ID');
-    
-    if(indoVoices.length === 0) {
-        const option = document.createElement("option");
-        option.textContent = "Suara Indo nggak ada 😢 Buka di HP aja";
-        option.disabled = true;
-        voiceSelect.appendChild(option);
-        
-        // Kasih pilihan English biar tetep bunyi
-        voices.forEach((voice, index) => {
-            const opt = document.createElement("option");
-            opt.value = index;
-            opt.textContent = `${voice.name} (${voice.lang})`;
-            voiceSelect.appendChild(opt);
-        });
-    } else {
-        indoVoices.forEach((voice) => {
-            const option = document.createElement("option");
-            option.value = voices.indexOf(voice);
-            option.textContent = `${voice.name} (${voice.lang})`;
-            voiceSelect.appendChild(option);
-        });
-    }
-}
-    
-    // Filter cuma suara Indonesia biar gampang
-    const indoVoices = voices.filter(voice => voice.lang.includes('id'));
-    const voiceList = indoVoices.length > 0 ? indoVoices : voices;
-    
-    voiceList.forEach((voice, index) => {
-        const option = document.createElement("option");
-        option.value = voices.indexOf(voice); // index asli
-        option.textContent = `${voice.name} (${voice.lang})`;
-        if(voice.lang.includes('id-ID')) option.selected = true; // Auto pilih Indo
+    Object.entries(EDGE_VOICES).forEach(([value, name]) => {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = name;
         voiceSelect.appendChild(option);
     });
-
-loadVoices();
-if (speechSynthesis.onvoiceschanged !== undefined) {
-    speechSynthesis.onvoiceschanged = loadVoices;
 }
 
-function playText() {
-    stopText(); // Stop dulu kalo lagi jalan
-    utterance = new SpeechSynthesisUtterance(getChapterText());
-    utterance.rate = parseFloat(speedInput.value);
-    utterance.pitch = 1;
-    utterance.volume = 1;
-    utterance.lang = "id-ID";
+async function playText() {
+    if (isPaused) {
+        audioPlayer.play();
+        isPaused = false;
+        return;
+    }
     
-    const selectedVoice = voices[voiceSelect.value];
-    if(selectedVoice) utterance.voice = selectedVoice;
+    stopText();
     
-    utterance.onend = () => { console.log("Selesai dibacakan Kang Arka"); };
+    const text = document.getElementById('chapterText').innerText;
+    const voice = document.getElementById('voiceSelect').value;
+    const speed = document.getElementById('speed').value;
     
-    synth.speak(utterance);
+    // Loading indicator
+    document.querySelector('.tts-btn').textContent = '⏳ Loading...';
+    
+    try {
+        // Panggil Edge TTS API gratisan
+        const response = await fetch('https://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/ssml+xml',
+                'X-Microsoft-OutputFormat': 'audio-24khz-48kbitrate-mono-mp3',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            },
+            body: `<speak version='1.0' xml:lang='id-ID'>
+                    <voice name='${voice}'>
+                        <prosody rate='${speed}'>${text}</prosody>
+                    </voice>
+                   </speak>`
+        });
+        
+        if (!response.ok) throw new Error('TTS gagal');
+        
+        const audioBlob = await response.blob();
+        const audioUrl = URL.createObjectURL(audioBlob);
+        
+        audioPlayer.src = audioUrl;
+        audioPlayer.play();
+        isPlaying = true;
+        
+        document.querySelector('.tts-btn').textContent = '▶ Play';
+        
+        audioPlayer.onended = () => {
+            isPlaying = false;
+            isPaused = false;
+        };
+        
+    } catch (err) {
+        alert('Gagal load suara Ardi. Coba refresh atau pake Edge browser langsung.');
+        document.querySelector('.tts-btn').textContent = '▶ Play';
+        console.error(err);
+    }
 }
 
-function pauseText() { synth.pause(); }
-function resumeText() { synth.resume(); }
-function stopText() { synth.cancel(); }
+function pauseText() {
+    if (isPlaying && !isPaused) {
+        audioPlayer.pause();
+        isPaused = true;
+    }
+}
+
+function stopText() {
+    audioPlayer.pause();
+    audioPlayer.currentTime = 0;
+    isPlaying = false;
+    isPaused = false;
+}
+
+// Load voices pas halaman dibuka
+document.addEventListener('DOMContentLoaded', populateVoices);
