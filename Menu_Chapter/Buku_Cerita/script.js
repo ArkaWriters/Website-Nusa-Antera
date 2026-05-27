@@ -37,13 +37,12 @@ async function playText() {
     document.querySelector('.tts-btn').textContent = '⏳ Loading...';
     
     try {
-        // Panggil Edge TTS API gratisan
-        const response = await fetch('https://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1', {
+        // Pake proxy biar lolos CORS di Github Pages
+        const response = await fetch('https://corsproxy.io/?' + encodeURIComponent('https://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1'), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/ssml+xml',
-                'X-Microsoft-OutputFormat': 'audio-24khz-48kbitrate-mono-mp3',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                'X-Microsoft-OutputFormat': 'audio-24khz-48kbitrate-mono-mp3'
             },
             body: `<speak version='1.0' xml:lang='id-ID'>
                     <voice name='${voice}'>
@@ -69,7 +68,7 @@ async function playText() {
         };
         
     } catch (err) {
-        alert('Gagal load suara Ardi. Coba refresh atau pake Edge browser langsung.');
+        alert('Gagal load suara Ardi. Coba refresh atau cek koneksi.');
         document.querySelector('.tts-btn').textContent = '▶ Play';
         console.error(err);
     }
