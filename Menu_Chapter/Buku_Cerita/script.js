@@ -1,92 +1,115 @@
-let audioPlayer = new Audio();
-let isPlaying = false;
-let isPaused = false;
+const synth = window.speechSynthesis;
 
-// Suara Edge Indonesia
-const EDGE_VOICES = {
-    "id-ID-ArdiNeural": "Ardi - Pria",
-    "id-ID-GadisNeural": "Gadis - Wanita"
-};
+const speedInput = document.getElementById("speed");
+const voiceSelect = document.getElementById("voiceSelect");
 
-function populateVoices() {
-    const voiceSelect = document.getElementById('voiceSelect');
-    voiceSelect.innerHTML = '';
-    
-    Object.entries(EDGE_VOICES).forEach(([value, name]) => {
-        const option = document.createElement('option');
-        option.value = value;
-        option.textContent = name;
+let voices = [];
+let utterance = null;
+
+// Ambil text chapter
+function getChapterText() {
+    const content = document.getElementById("chapterText");
+    return content ? content.innerText : "";
+}
+
+// Load semua voice
+function loadVoices() {
+    voices = synth.getVoices();
+
+    // Kosongkan dropdown
+    voiceSelect.innerHTML = "";
+
+    // Cari suara Indonesia
+    const indoVoices = voices.filter(v => 
+        v.lang.toLowerCase().includes("id")
+    );
+
+    // Kalau tidak ada suara Indo pakai semua voice
+    const voiceList = indoVoices.length > 0 ? indoVoices : voices;
+
+    voiceList.forEach((voice) => {
+        const option = document.createElement("option");
+
+        option.value = voices.indexOf(voice);
+        option.textContent = `${voice.name} (${voice.lang})`;
+
+        // Auto pilih voice Indo
+        if (voice.lang === "id-ID") {
+            option.selected = true;
+        }
+
         voiceSelect.appendChild(option);
     });
+
+    console.log("Voices Loaded:", voices);
 }
 
-async function playText() {
-    if (isPaused) {
-        audioPlayer.play();
-        isPaused = false;
+// Chrome fix
+loadVoices();
+
+if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = loadVoices;
+}
+
+// Play
+function playText() {
+
+    // Stop dulu kalau masih jalan
+    synth.cancel();
+
+    const text = getChapterText();
+
+    if (!text.trim()) {
+        alert("Teks kosong!");
         return;
     }
-    
-    stopText();
-    
-    const text = document.getElementById('chapterText').innerText;
-    const voice = document.getElementById('voiceSelect').value;
-    const speed = document.getElementById('speed').value;
-    
-    // Loading indicator
-    document.querySelector('.tts-btn').textContent = '⏳ Loading...';
-    
-    try {
-        // Pake proxy biar lolos CORS di Github Pages
-        const response = await fetch('https://corsproxy.io/?' + encodeURIComponent('https://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1'), {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/ssml+xml',
-                'X-Microsoft-OutputFormat': 'audio-24khz-48kbitrate-mono-mp3'
-            },
-            body: `<speak version='1.0' xml:lang='id-ID'>
-                    <voice name='${voice}'>
-                        <prosody rate='${speed}'>${text}</prosody>
-                    </voice>
-                   </speak>`
-        });
-        
-        if (!response.ok) throw new Error('TTS gagal');
-        
-        const audioBlob = await response.blob();
-        const audioUrl = URL.createObjectURL(audioBlob);
-        
-        audioPlayer.src = audioUrl;
-        audioPlayer.play();
-        isPlaying = true;
-        
-        document.querySelector('.tts-btn').textContent = '▶ Play';
-        
-        audioPlayer.onended = () => {
-            isPlaying = false;
-            isPaused = false;
-        };
-        
-    } catch (err) {
-        alert('Gagal load suara Ardi. Coba refresh atau cek koneksi.');
-        document.querySelector('.tts-btn').textContent = '▶ Play';
-        console.error(err);
+
+    utterance = new SpeechSynthesisUtterance(text);
+
+    utterance.rate = parseFloat(speedInput.value) || 1;
+    utterance.pitch = 1;
+    utterance.volume = 1;
+
+    // Ambil voice terpilih
+    const selectedVoice = voices[voiceSelect.value];
+
+    if (selectedVoice) {
+        utterance.voice = selectedVoice;
+        utterance.lang = selectedVoice.lang;
+    } else {
+        utterance.lang = "id-ID";
     }
+
+    utterance.onstart = () => {
+        console.log("Mulai membaca...");
+    };
+
+    utterance.onend = () => {
+        console.log("Selesai membaca");
+    };
+
+    utterance.onerror = (e) => {
+        console.error("Speech Error:", e);
+    };
+
+    synth.speak(utterance);
 }
 
+// Pause
 function pauseText() {
-    if (isPlaying && !isPaused) {
-        audioPlayer.pause();
-        isPaused = true;
+    if (synth.speaking) {
+        synth.pause();
     }
 }
 
-function stopText() {
-    audioPlayer.pause();
-    audioPlayer.currentTime = 0;
-    isPlaying = false;
-    isPaused = false;
+// Resume
+function resumeText() {
+    if (synth.paused) {
+        synth.resume();
+    }
 }
 
-// Load voices pas halaman dibuka
-document.addEventListener('DOMContentLoaded', populateVoices);
+// Stop
+function stopText() {
+    synth.cancel();
+}
