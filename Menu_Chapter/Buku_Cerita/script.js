@@ -1,115 +1,146 @@
 const synth = window.speechSynthesis;
 
-const speedInput = document.getElementById("speed");
 const voiceSelect = document.getElementById("voiceSelect");
+const speedInput = document.getElementById("speed");
 
 let voices = [];
-let utterance = null;
+let currentUtterance;
 
-// Ambil text chapter
-function getChapterText() {
-    const content = document.getElementById("chapterText");
-    return content ? content.innerText : "";
-}
-
-// Load semua voice
+// =========================
+// LOAD VOICES (CHROME FIX)
+// =========================
 function loadVoices() {
     voices = synth.getVoices();
 
-    // Kosongkan dropdown
     voiceSelect.innerHTML = "";
 
-    // Cari suara Indonesia
-    const indoVoices = voices.filter(v => 
-        v.lang.toLowerCase().includes("id")
-    );
-
-    // Kalau tidak ada suara Indo pakai semua voice
-    const voiceList = indoVoices.length > 0 ? indoVoices : voices;
-
-    voiceList.forEach((voice) => {
+    voices.forEach((voice, index) => {
         const option = document.createElement("option");
 
-        option.value = voices.indexOf(voice);
+        option.value = index;
         option.textContent = `${voice.name} (${voice.lang})`;
 
-        // Auto pilih voice Indo
-        if (voice.lang === "id-ID") {
+        // auto pilih indo kalau ada
+        if (voice.lang.includes("id")) {
             option.selected = true;
         }
 
         voiceSelect.appendChild(option);
     });
 
-    console.log("Voices Loaded:", voices);
+    console.log("VOICE LOADED:", voices);
 }
 
-// Chrome fix
-loadVoices();
+// Chrome kadang butuh delay
+setTimeout(loadVoices, 500);
 
-if (speechSynthesis.onvoiceschanged !== undefined) {
-    speechSynthesis.onvoiceschanged = loadVoices;
+speechSynthesis.onvoiceschanged = () => {
+    loadVoices();
+};
+
+// =========================
+// AMBIL TEXT
+// =========================
+function getChapterText() {
+    return document.getElementById("chapterText").innerText;
 }
 
-// Play
-function playText() {
+// =========================
+// POTONG TEXT PANJANG
+// =========================
+function splitText(text, maxLength = 180) {
+    const sentences = text.match(/[^\.!\?]+[\.!\?]+/g) || [text];
 
-    // Stop dulu kalau masih jalan
-    synth.cancel();
+    let chunks = [];
+    let currentChunk = "";
+
+    sentences.forEach(sentence => {
+
+        if ((currentChunk + sentence).length > maxLength) {
+            chunks.push(currentChunk);
+            currentChunk = sentence;
+        } else {
+            currentChunk += sentence;
+        }
+
+    });
+
+    if (currentChunk) chunks.push(currentChunk);
+
+    return chunks;
+}
+
+// =========================
+// PLAY TEXT
+// =========================
+async function playText() {
+
+    stopText();
 
     const text = getChapterText();
 
     if (!text.trim()) {
-        alert("Teks kosong!");
+        alert("Text kosong");
         return;
     }
 
-    utterance = new SpeechSynthesisUtterance(text);
+    const chunks = splitText(text);
 
-    utterance.rate = parseFloat(speedInput.value) || 1;
-    utterance.pitch = 1;
-    utterance.volume = 1;
+    for (let chunk of chunks) {
 
-    // Ambil voice terpilih
-    const selectedVoice = voices[voiceSelect.value];
+        await speakChunk(chunk);
 
-    if (selectedVoice) {
-        utterance.voice = selectedVoice;
-        utterance.lang = selectedVoice.lang;
-    } else {
-        utterance.lang = "id-ID";
     }
-
-    utterance.onstart = () => {
-        console.log("Mulai membaca...");
-    };
-
-    utterance.onend = () => {
-        console.log("Selesai membaca");
-    };
-
-    utterance.onerror = (e) => {
-        console.error("Speech Error:", e);
-    };
-
-    synth.speak(utterance);
 }
 
-// Pause
+// =========================
+// SPEAK PER CHUNK
+// =========================
+function speakChunk(text) {
+
+    return new Promise((resolve) => {
+
+        currentUtterance = new SpeechSynthesisUtterance(text);
+
+        currentUtterance.rate = parseFloat(speedInput.value) || 1;
+        currentUtterance.pitch = 1;
+        currentUtterance.volume = 1;
+
+        const selectedVoice = voices[voiceSelect.value];
+
+        if (selectedVoice) {
+            currentUtterance.voice = selectedVoice;
+            currentUtterance.lang = selectedVoice.lang;
+        }
+
+        currentUtterance.onend = () => {
+            resolve();
+        };
+
+        currentUtterance.onerror = (e) => {
+            console.error("ERROR:", e);
+            resolve();
+        };
+
+        // Chrome fix delay
+        setTimeout(() => {
+            synth.speak(currentUtterance);
+        }, 100);
+
+    });
+}
+
+// =========================
+// CONTROL
+// =========================
 function pauseText() {
-    if (synth.speaking) {
-        synth.pause();
-    }
+    synth.pause();
 }
 
-// Resume
 function resumeText() {
-    if (synth.paused) {
-        synth.resume();
-    }
+    synth.resume();
 }
 
-// Stop
 function stopText() {
     synth.cancel();
 }
