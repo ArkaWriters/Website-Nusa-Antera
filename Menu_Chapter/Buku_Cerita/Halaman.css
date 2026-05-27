@@ -318,3 +318,50 @@ h2 {
         max-width: 100%;
     }
 }
+    /* Biar kotak TTS nggak kegedean di HP */
+@media (max-width: 600px) {
+    .tts-box {
+        padding: 12px 14px; /* padding dikecilin */
+        margin: 0 0 20px 0;
+        border-radius: 6px;
+    }
+
+    .tts-header {
+        font-size: 16px; /* judul ngecil */
+        margin-bottom: 8px;
+    }
+
+    .tts-controls {
+        flex-direction: row; /* biar tetep sebaris kalo muat */
+        flex-wrap: wrap;
+        gap: 6px; /* jarak antar tombol lebih rapet */
+    }
+
+    .tts-btn {
+        padding: 6px 10px; /* tombol lebih tipis */
+        font-size: 13px;
+        border-radius: 5px;
+        flex: 1 1 auto; /* tombol bagi rata */
+        min-width: 70px;
+    }
+
+    .tts-option {
+        font-size: 13px;
+        gap: 6px;
+        flex: 1 1 100%; /* select + range full width */
+    }
+
+    .tts-option select, 
+    .tts-option input[type="range"] {
+        padding: 5px;
+        font-size: 13px;
+    }
+    
+    .tts-option select {
+        max-width: 100%;
+    }
+    
+    .tts-option input[type="range"] {
+        flex: 1;
+    }
+}
