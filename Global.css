@@ -1,0 +1,69 @@
+/* === GLOBAL.CSS - FITUR UNTUK SEMUA HALAMAN === */
+:root {
+    --bg-dark: #1a1a1a;
+    --text-dark: #f0f0f0;
+    --bg-light: #f8f5ed;
+    --text-light: #1a1a1a;
+    --accent: #c9a959;
+    --accent-red: #ff6b6b;
+}
+
+/* Mode dasar */
+body {
+    transition: background 0.3s, color 0.3s;
+}
+
+/* === MODE TERANG === */
+body.light-mode {
+    background-color: var(--bg-light) !important;
+    color: var(--text-light) !important;
+}
+
+/* === PROGRESS BAR - MUNCUL DI SEMUA HALAMAN === */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-red));
+    z-index: 1000;
+    transition: width 0.1s;
+}
+
+/* === TOMBOL MODE CAHAYA === */
+.light-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--accent);
+    color: #1a1a1a;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 18px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(201, 169, 89, 0.3);
+    transition: 0.2s;
+}
+
+.light-toggle:hover {
+    transform: translateY(-2px);
+}
+
+/* === TOMBOL LANJUTKAN BACA === */
+.resume-btn {
+    display: none;
+    background: var(--accent);
+    color: #1a1a1a;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 20px 0;
+    text-align: center;
+}
+.resume-btn.show {
+    display: block;
+}
