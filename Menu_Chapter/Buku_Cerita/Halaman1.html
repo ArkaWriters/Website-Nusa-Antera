@@ -123,57 +123,7 @@
     </nav>
 </div>
 
-<!-- JAVASCRIPT-NYA WAJIB ADA DI SINI, SEBELUM </body> -->
-<script>
-const synth = window.speechSynthesis;
-const speedInput = document.getElementById("speed");
-const voiceSelect = document.getElementById("voiceSelect");
-let voices = [];
-let utterance;
-
-function getChapterText() {
-    const content = document.getElementById("chapterText");
-    return content.innerText;
-}
-
-function loadVoices() {
-    voices = synth.getVoices();
-    voiceSelect.innerHTML = "";
-    
-    const indoVoices = voices.filter(voice => voice.lang.includes('id'));
-    const voiceList = indoVoices.length > 0 ? indoVoices : voices;
-    
-    voiceList.forEach((voice) => {
-        const option = document.createElement("option");
-        option.value = voices.indexOf(voice);
-        option.textContent = `${voice.name} (${voice.lang})`;
-        if(voice.lang === 'id-ID') option.selected = true;
-        voiceSelect.appendChild(option);
-    });
-}
-
-loadVoices();
-if (speechSynthesis.onvoiceschanged !== undefined) {
-    speechSynthesis.onvoiceschanged = loadVoices;
-}
-
-function playText() {
-    stopText();
-    utterance = new SpeechSynthesisUtterance(getChapterText());
-    utterance.rate = parseFloat(speedInput.value);
-    utterance.lang = "id-ID";
-    
-    const selectedVoice = voices[voiceSelect.value];
-    if(selectedVoice) utterance.voice = selectedVoice;
-    
-    synth.speak(utterance);
-}
-
-function pauseText() { synth.pause(); }
-function stopText() { synth.cancel(); }
-</script>
-
-<script src="script.js"></script>
+<script src="../../script.js"></script>
 
 </body>
 </html>
