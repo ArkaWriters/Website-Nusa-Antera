@@ -79,7 +79,7 @@ function initSaveProgress() {
 
         window.addEventListener('scroll', () => {
             clearTimeout(saveTimer);
-            saveTimer = setTimeout(saveProgress, 1000); // save tiap 1 detik abis scroll berhenti
+            saveTimer = setTimeout(saveProgress, 3000); // save tiap 3 detik abis scroll berhenti
         });
 
         window.addEventListener('beforeunload', saveProgress);
