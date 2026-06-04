@@ -9,17 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initDarkMode();
 
     // =================================
-    // 2. PROGRESS BAR + SAVE PROGRESS + RESTORE
-    // =================================
-   if (isChapterPage()) {
-        initProgressBar();
-        initSaveProgress();
-        initRestoreProgress();
-    }
-    initResumeButton();
-    // <- ini wajib dipanggil di sini
-
-    // =================================
     // 3. TTS KANG ARKA
     // =================================
     initTTS();
@@ -60,11 +49,16 @@ function isChapterPage() {
 document.addEventListener('DOMContentLoaded', () => {
     
     // Fitur ini CUMA AKTIF DI HALAMAN CHAPTER
-    
+    if (isChapterPage()) {
+        initProgressBar();
+        initSaveProgress();
+        initRestoreProgress();
+    }
     
     // Fitur ini AKTIF DI SEMUA HALAMAN kecuali halaman chapter itu sendiri
     // Biar tombol "Lanjutkan Baca" muncul di index/menu
-    
+    initResumeButton();
+});
 
 // --- FUNGSI LO TETEP SAMA, NGGAK USAH DIUBAH ---
 
@@ -223,4 +217,4 @@ function initTTS() {
     window.pauseText = () => synth.pause();
     window.resumeText = () => synth.resume();
     window.stopText = () => synth.cancel();
-}ini full js nya coba di cek apakah ada yang salah?
+}
