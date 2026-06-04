@@ -1,29 +1,36 @@
 // === NUSA ANTERA MAIN SCRIPT ===
 // Last Update: 2026-10-05
 
+function isChapterPage() {
+    const result = window.location.pathname.toLowerCase().includes('chapter');
+    console.log('PATH:', window.location.pathname);
+    console.log('IS CHAPTER:', result);
+    return result;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 
     // =================================
-    // 1. MODE SATRIA / DARK MODE
+    // 1. MODE SATRIA / DARK MODE - AKTIF DI SEMUA HALAMAN
     // =================================
     initDarkMode();
 
-    initDarkMode();
-
+    // =================================
+    // 2. FITUR KHUS CHAPTER DOANG
+    // =================================
     if (isChapterPage()) {
         initProgressBar();
         initSaveProgress();
         initRestoreProgress();
-        initTTS();
+        initTTS(); // TTS cuma di chapter
     }
 
+    // =================================
+    // 3. TOMBOL LANJUTKAN BACA - AKTIF DI INDEX/MENU DOANG
+    // =================================
     if (!isChapterPage()) {
         initResumeButton();
     }
-    // =================================
-    // 3. TTS KANG ARKA
-    // =================================
-    initTTS();
 
     // =================================
     // 4. TTS BEDA SUARA PER KARAKTER [NEXT]
@@ -34,6 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
 // === SEMUA FUNGSI TARO DI BAWAH ===
 
 function initDarkMode() {
+    // Cek dulu biar tombolnya nggak dobel
+    if (document.querySelector('.light-toggle')) return;
+
     const lightToggle = document.createElement('button');
     lightToggle.className = 'light-toggle';
     lightToggle.innerHTML = '☀️ Mode Cahaya';
@@ -51,18 +61,11 @@ function initDarkMode() {
         lightToggle.innerHTML = isLight? '🌙 Mode Satria' : '☀️ Mode Cahaya';
     });
 }
-function isChapterPage() {
-    const result = window.location.pathname
-        .toLowerCase()
-        .includes('chapter');
 
-    console.log('PATH:', window.location.pathname);
-    console.log('IS CHAPTER:', result);
-
-    return result;
-}
-}
 function initProgressBar() {
+    // Cek biar progress bar nggak dobel
+    if (document.querySelector('.progress-bar')) return;
+
     const progressBar = document.createElement('div');
     progressBar.className = 'progress-bar';
     document.body.appendChild(progressBar);
@@ -104,8 +107,7 @@ function initResumeButton() {
     const lastUrl = localStorage.getItem('lastChapterUrl');
     const menuBox = document.querySelector('.menu-chapter');
 
-    // Tombol muncul kalo: ada data save + ada menuBox + BUKAN lagi di halaman chapter
-    if (lastChapter && lastUrl && menuBox && !isChapterPage()) {
+    if (lastChapter && lastUrl && menuBox &&!isChapterPage()) {
         if (!document.querySelector('.resume-btn')) {
             const resumeBtn = document.createElement('a');
             resumeBtn.href = lastUrl;
@@ -131,6 +133,7 @@ function initRestoreProgress() {
         });
     }
 }
+
 function initTTS() {
     const synth = window.speechSynthesis;
     const voiceSelect = document.getElementById("voiceSelect");
@@ -138,10 +141,13 @@ function initTTS() {
     let voices = [];
     let currentUtterance;
 
+    if (!voiceSelect ||!speedInput) {
+        console.log("TTS: voiceSelect/speedInput nggak ketemu. Skip initTTS");
+        return;
+    }
+
     function loadVoices() {
         voices = synth.getVoices();
-        if(!voiceSelect) return;
-
         voiceSelect.innerHTML = "";
         voices.forEach((voice, index) => {
             const option = document.createElement("option");
