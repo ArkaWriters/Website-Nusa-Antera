@@ -48,6 +48,28 @@ function initDarkMode() {
     });
 }
 
+// Cek dulu: ini halaman chapter apa bukan?
+function isChapterPage() {
+    return window.location.pathname.toLowerCase().includes('chapter');
+}
+
+// Jalanin semua fitur pas web ke-load
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // Fitur ini CUMA AKTIF DI HALAMAN CHAPTER
+    if (isChapterPage()) {
+        initProgressBar();
+        initSaveProgress();
+        initRestoreProgress();
+    }
+    
+    // Fitur ini AKTIF DI SEMUA HALAMAN kecuali halaman chapter itu sendiri
+    // Biar tombol "Lanjutkan Baca" muncul di index/menu
+    initResumeButton();
+});
+
+// --- FUNGSI LO TETEP SAMA, NGGAK USAH DIUBAH ---
+
 function initProgressBar() {
     const progressBar = document.createElement('div');
     progressBar.className = 'progress-bar';
@@ -62,7 +84,6 @@ function initProgressBar() {
 }
 
 function initSaveProgress() {
-    // Support H2 id="Chapter1" atau id="chapter1"
     const chapterTitle = document.querySelector('h2[id^="Chapter"], h2[id^="chapter"]');
 
     if (chapterTitle) {
@@ -79,7 +100,7 @@ function initSaveProgress() {
 
         window.addEventListener('scroll', () => {
             clearTimeout(saveTimer);
-            saveTimer = setTimeout(saveProgress, 3000); // save tiap 3 detik abis scroll berhenti
+            saveTimer = setTimeout(saveProgress, 3000);
         });
 
         window.addEventListener('beforeunload', saveProgress);
@@ -91,8 +112,8 @@ function initResumeButton() {
     const lastUrl = localStorage.getItem('lastChapterUrl');
     const menuBox = document.querySelector('.menu-chapter');
 
-    if (lastChapter && lastUrl && menuBox &&!window.location.pathname.toLowerCase().includes('chapter')) {
-        // Cek biar nggak bikin tombol dobel
+    // Tombol muncul kalo: ada data save + ada menuBox + BUKAN lagi di halaman chapter
+    if (lastChapter && lastUrl && menuBox && !isChapterPage()) {
         if (!document.querySelector('.resume-btn')) {
             const resumeBtn = document.createElement('a');
             resumeBtn.href = lastUrl;
@@ -114,11 +135,10 @@ function initRestoreProgress() {
                     top: parseInt(savedPos),
                     behavior: "auto"
                 });
-            }, 100); // kasih delay dikit biar gambar ke-load dulu
+            }, 100);
         });
     }
 }
-
 function initTTS() {
     const synth = window.speechSynthesis;
     const voiceSelect = document.getElementById("voiceSelect");
