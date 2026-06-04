@@ -8,14 +8,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // =================================
     initDarkMode();
 
-    // =================================
-    // 2. PROGRESS BAR + SAVE PROGRESS + RESTORE
-    // =================================
-    initProgressBar();
-    initSaveProgress();
-    initResumeButton();
-    initRestoreProgress(); // <- ini wajib dipanggil di sini
+    initDarkMode();
 
+    if (isChapterPage()) {
+        initProgressBar();
+        initSaveProgress();
+        initRestoreProgress();
+        initTTS();
+    }
+
+    if (!isChapterPage()) {
+        initResumeButton();
+    }
     // =================================
     // 3. TTS KANG ARKA
     // =================================
@@ -47,29 +51,17 @@ function initDarkMode() {
         lightToggle.innerHTML = isLight? '🌙 Mode Satria' : '☀️ Mode Cahaya';
     });
 }
-
-// Cek dulu: ini halaman chapter apa bukan?
 function isChapterPage() {
-    return window.location.pathname.toLowerCase().includes('chapter');
+    const result = window.location.pathname
+        .toLowerCase()
+        .includes('chapter');
+
+    console.log('PATH:', window.location.pathname);
+    console.log('IS CHAPTER:', result);
+
+    return result;
 }
-
-// Jalanin semua fitur pas web ke-load
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // Fitur ini CUMA AKTIF DI HALAMAN CHAPTER
-    if (isChapterPage()) {
-        initProgressBar();
-        initSaveProgress();
-        initRestoreProgress();
-    }
-    
-    // Fitur ini AKTIF DI SEMUA HALAMAN kecuali halaman chapter itu sendiri
-    // Biar tombol "Lanjutkan Baca" muncul di index/menu
-    initResumeButton();
-});
-
-// --- FUNGSI LO TETEP SAMA, NGGAK USAH DIUBAH ---
-
+}
 function initProgressBar() {
     const progressBar = document.createElement('div');
     progressBar.className = 'progress-bar';
