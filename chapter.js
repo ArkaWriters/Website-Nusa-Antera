@@ -1,10 +1,12 @@
 // === NUSA ANTERA CHAPTER SCRIPT - KHUS BAB ===
 
 document.addEventListener('DOMContentLoaded', function() {
-    initProgressBar();
-    initSaveProgress();
-    initRestoreProgress();
-    initTTS();
+    if (typeof isChapterPage === 'function' && isChapterPage()) {
+        initProgressBar();
+        initSaveProgress();
+        initRestoreProgress();
+        initTTS();
+    }
 });
 
 function initProgressBar() {
