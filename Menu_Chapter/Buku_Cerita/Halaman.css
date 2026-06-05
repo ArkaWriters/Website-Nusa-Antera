@@ -445,64 +445,73 @@ body.light-mode .tts-option input[type="range"] {
     color: #1a1a1a;
     border-color: #ccc;
 }
-/* === TTS VERSI KOMPAK - PAS DI HP === */
+/* === TTS VERSI MINI - LEBIH KECIL DARI CHAPTER === */
 .tts-box {
     background-color: #1a1a1a;
-    padding: 12px 16px; /* dari 16px 20px jadi lebih kecil */
-    margin: 25px -20px; /* dari -25px jadi -20px biar nggak nongol kiri */
+    padding: 8px 12px; /* dari 12px 16px jadi lebih tipis */
+    margin: 20px -20px; /* margin atas bawah dikecilin */
     border-radius: 0;
     border-left: none;
     border-right: none;
-    border-top: 2px solid #4ecdc4; /* dari 3px jadi 2px */
-    border-bottom: 2px solid #4ecdc4;
-    width: calc(100% + 40px); /* 20px kiri + 20px kanan */
+    border-top: 1px solid #4ecdc4; /* dari 2px jadi 1px */
+    border-bottom: 1px solid #4ecdc4;
+    width: calc(100% + 40px);
 }
 
 .tts-header {
-    font-size: 15px; /* dari 18px */
-    margin-bottom: 8px; /* dari 12px */
+    font-size: 13px; /* chapterText lo 18px, ini 13px = lebih kecil */
+    margin-bottom: 6px;
+    font-weight: 500; /* jangan bold banget */
+    opacity: 0.9; /* agak pudar biar nggak rebutan fokus */
 }
 
 .tts-controls {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* 3 tombol sejajar */
-    gap: 6px; /* dari 10px */
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px; /* dari 6px */
 }
 
 .tts-btn {
-    grid-column: auto; /* jangan bentang full lagi */
-    padding: 8px 4px; /* dari 12px */
-    font-size: 13px; /* dari 15px */
-    border-radius: 6px;
+    padding: 6px 2px; /* dari 8px 4px */
+    font-size: 11px; /* chapterText 18px, tombol cuma 11px */
+    border-radius: 4px; /* dari 6px */
+    font-weight: 500;
 }
 
 .tts-option {
-    grid-column: 1 / -1; /* speed + suara turun ke bawah */
-    font-size: 12px;
-    margin-top: 6px;
+    grid-column: 1 / -1;
+    font-size: 11px; /* label speed + suara */
+    margin-top: 4px;
+    gap: 3px;
 }
 
 .tts-option select, .tts-option input[type="range"] {
-    padding: 5px; /* dari 8px */
-    font-size: 12px;
+    padding: 3px; /* dari 5px */
+    font-size: 11px; /* lebih kecil dari chapterText */
+    height: 24px; /* paksa tinggi kecil */
+}
+
+/* Slider speed biar tipis */
+.tts-option input[type="range"] {
+    height: 3px;
 }
 
 /* HP kecil banget <380px */
 @media (max-width: 380px) {
     .tts-box {
-        margin: 20px -15px;
+        margin: 15px -15px;
         width: calc(100% + 30px);
-        padding: 10px 12px;
+        padding: 6px 10px;
     }
     .tts-btn {
-        font-size: 12px;
-        padding: 6px 2px;
+        font-size: 10px;
+        padding: 4px 1px;
     }
 }
 
 /* Mode terang */
 body.light-mode .tts-box {
     background: #ffffff;
-    border-top: 2px solid #c9a959;
-    border-bottom: 2px solid #c9a959;
+    border-top: 1px solid #c9a959;
+    border-bottom: 1px solid #c9a959;
 }
