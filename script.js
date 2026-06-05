@@ -49,3 +49,58 @@ function initResumeButton() {
         }
     }
 }
+
+function initNotifChapter() {
+    const btn = document.getElementById('subscribeBtn');
+    const status = document.getElementById('subscribeStatus');
+    if (!btn) return;
+
+    // GANTI ANGKA INI TIAP RILIS CHAPTER BARU
+    const LATEST_CHAPTER = 9; // Sekarang chapter 9. Nanti ganti jadi 10
+
+    // Cek status langganan
+    if (localStorage.getItem('notifSubscribed') === 'true') {
+        btn.textContent = '✅ Udah Langganan';
+        btn.disabled = true;
+        status.textContent = `Kamu bakal dapet notif Chapter ${LATEST_CHAPTER + 1}`;
+    }
+
+    btn.addEventListener('click', async () => {
+        // Minta izin notifikasi ke browser
+        const permission = await Notification.requestPermission();
+        
+        if (permission === 'granted') {
+            localStorage.setItem('notifSubscribed', 'true');
+            btn.textContent = '✅ Udah Langganan';
+            btn.disabled = true;
+            status.textContent = `Sip! Nanti dikasih tau kalo Chapter ${LATEST_CHAPTER + 1} rilis`;
+
+            // Kasih notif tes langsung
+            new Notification('Nusa Antera', {
+                body: `Makasih udah langganan! Chapter ${LATEST_CHAPTER} udah bisa dibaca sekarang`,
+                icon: 'Sampul_Novel_7_Kesatria_Pelangi.png' // ganti pake sampul lo
+            });
+        } else {
+            status.textContent = 'Izin notifikasi ditolak. Nyalain manual di setting browser ya';
+        }
+    });
+
+    // Kalo ada chapter baru, langsung spam notif
+    const lastNotified = localStorage.getItem('lastNotifiedChapter');
+    if (localStorage.getItem('notifSubscribed') === 'true' && lastNotified != LATEST_CHAPTER) {
+        new Notification('Chapter Baru Nusa Antera!', {
+            body: `Chapter ${LATEST_CHAPTER}: Teman Sekamar & Mimpi Buruk udah rilis. Baca sekarang!`,
+            icon: 'Sampul_Novel_7_Kesatria_Pelangi.png'
+        });
+        localStorage.setItem('lastNotifiedChapter', LATEST_CHAPTER);
+    }
+}
+
+// Jangan lupa panggil di DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    initDarkMode();
+    if (!isChapterPage()) {
+        initResumeButton();
+        initNotifChapter(); // ← TAMBAH INI
+    }
+});
