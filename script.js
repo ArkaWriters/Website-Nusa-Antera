@@ -87,13 +87,20 @@ function initNotifChapter() {
 
     // Kalo ada chapter baru, langsung spam notif
     const lastNotified = localStorage.getItem('lastNotifiedChapter');
-    if (localStorage.getItem('notifSubscribed') === 'true' && lastNotified != LATEST_CHAPTER) {
-        new Notification('Chapter Baru Nusa Antera!', {
-            body: `Chapter ${LATEST_CHAPTER}: Teman Sekamar & Mimpi Buruk udah rilis. Baca sekarang!`,
-            icon: 'Sampul_Novel_7_Kesatria_Pelangi.png'
-        });
-        localStorage.setItem('lastNotifiedChapter', LATEST_CHAPTER);
-    }
+   const lastNotified = Number(localStorage.getItem('lastNotifiedChapter') || 0);
+
+if (
+    localStorage.getItem('notifSubscribed') === 'true' &&
+    Notification.permission === 'granted' &&
+    lastNotified !== LATEST_CHAPTER
+) {
+    new Notification('Chapter Baru Nusa Antera!', {
+        body: `Chapter ${LATEST_CHAPTER}: Teman Sekamar & Mimpi Buruk udah rilis. Baca sekarang!`,
+        icon: 'Sampul_Novel_7_Kesatria_Pelangi.png'
+    });
+
+    localStorage.setItem('lastNotifiedChapter', LATEST_CHAPTER);
+}
 }
 
 // Jangan lupa panggil di DOMContentLoaded
