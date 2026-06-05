@@ -445,72 +445,64 @@ body.light-mode .tts-option input[type="range"] {
     color: #1a1a1a;
     border-color: #ccc;
 }
-/* === FIX TTS MOBILE - KELUAR DARI CHAPTERBOX === */
+/* === TTS VERSI KOMPAK - PAS DI HP === */
 .tts-box {
     background-color: #1a1a1a;
-    padding: 16px 20px;
-    border-radius: 0; /* hapus radius biar nempel tepi */
-    margin: 30px -25px; /* -25px = lawan padding chapter-box */
+    padding: 12px 16px; /* dari 16px 20px jadi lebih kecil */
+    margin: 25px -20px; /* dari -25px jadi -20px biar nggak nongol kiri */
+    border-radius: 0;
     border-left: none;
     border-right: none;
-    border-top: 3px solid #4ecdc4;
-    border-bottom: 3px solid #4ecdc4;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    width: calc(100% + 50px); /* 25px kiri + 25px kanan */
+    border-top: 2px solid #4ecdc4; /* dari 3px jadi 2px */
+    border-bottom: 2px solid #4ecdc4;
+    width: calc(100% + 40px); /* 20px kiri + 20px kanan */
 }
 
-/* Tombol + control biar rapih di HP */
+.tts-header {
+    font-size: 15px; /* dari 18px */
+    margin-bottom: 8px; /* dari 12px */
+}
+
 .tts-controls {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr; /* 3 tombol sejajar */
+    gap: 6px; /* dari 10px */
 }
 
 .tts-btn {
-    grid-column: 1 / -1; /* tombol play pause bentang full */
-    background: #2b2b2b;
-    color: #4ecdc4;
-    border: 1px solid #444;
-    border-radius: 8px;
-    padding: 12px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: bold;
-    transition: 0.2s;
+    grid-column: auto; /* jangan bentang full lagi */
+    padding: 8px 4px; /* dari 12px */
+    font-size: 13px; /* dari 15px */
+    border-radius: 6px;
 }
 
 .tts-option {
-    display: flex;
-    flex-direction: column; /* label di atas, select di bawah */
-    gap: 5px;
-    color: #ccc;
-    font-size: 13px;
+    grid-column: 1 / -1; /* speed + suara turun ke bawah */
+    font-size: 12px;
+    margin-top: 6px;
 }
 
 .tts-option select, .tts-option input[type="range"] {
-    background: #2b2b2b;
-    color: #f0f0f0;
-    border: 1px solid #444;
-    border-radius: 6px;
-    padding: 8px;
-    width: 100%;
+    padding: 5px; /* dari 8px */
+    font-size: 12px;
 }
 
-/* KHUS HP KECIL BANGET <400px */
-@media (max-width: 400px) {
+/* HP kecil banget <380px */
+@media (max-width: 380px) {
     .tts-box {
-        margin: 30px -15px; /* kalo padding chapter-box lo 15px di HP */
+        margin: 20px -15px;
         width: calc(100% + 30px);
-        padding: 14px 15px;
+        padding: 10px 12px;
     }
-    .tts-controls {
-        grid-template-columns: 1fr; /* jadi 1 kolom semua */
+    .tts-btn {
+        font-size: 12px;
+        padding: 6px 2px;
     }
 }
 
-/* MODE TERANG IKUTAN */
+/* Mode terang */
 body.light-mode .tts-box {
     background: #ffffff;
-    border-top: 3px solid #c9a959;
-    border-bottom: 3px solid #c9a959;
+    border-top: 2px solid #c9a959;
+    border-bottom: 2px solid #c9a959;
 }
