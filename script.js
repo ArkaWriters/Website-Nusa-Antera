@@ -7,9 +7,10 @@ function isChapterPage() {
 document.addEventListener('DOMContentLoaded', function() {
     initDarkMode();
 
-    // Tombol lanjut cuma muncul di index/menu-chapter
+    // Tombol lanjut + notif cuma muncul di menu chapter
     if (!isChapterPage()) {
         initResumeButton();
+        initNotifChapter();
     }
 });
 
@@ -37,9 +38,9 @@ function initDarkMode() {
 function initResumeButton() {
     const lastChapter = localStorage.getItem('lastChapter');
     const lastUrl = localStorage.getItem('lastChapterUrl');
-    const menuBox = document.querySelector('.chapter-box'); // ← UDAH GUE GANTI
+    const menuBox = document.querySelector('.chapter-box');
 
-    if (lastChapter && lastUrl && menuBox &&!isChapterPage()) {
+    if (lastChapter && lastUrl && menuBox && !isChapterPage()) {
         if (!document.querySelector('.resume-btn')) {
             const resumeBtn = document.createElement('a');
             resumeBtn.href = lastUrl;
@@ -56,7 +57,7 @@ function initNotifChapter() {
     if (!btn) return;
 
     // GANTI ANGKA INI TIAP RILIS CHAPTER BARU
-    const LATEST_CHAPTER = 6; // Sekarang chapter 6,
+    const LATEST_CHAPTER = 6;
 
     // Cek status langganan
     if (localStorage.getItem('notifSubscribed') === 'true') {
@@ -66,7 +67,6 @@ function initNotifChapter() {
     }
 
     btn.addEventListener('click', async () => {
-        // Minta izin notifikasi ke browser
         const permission = await Notification.requestPermission();
         
         if (permission === 'granted') {
@@ -75,39 +75,27 @@ function initNotifChapter() {
             btn.disabled = true;
             status.textContent = `Sip! Nanti dikasih tau kalo Chapter ${LATEST_CHAPTER + 1} rilis`;
 
-            // Kasih notif tes langsung
             new Notification('Nusa Antera', {
                 body: `Makasih udah langganan! Chapter ${LATEST_CHAPTER} udah bisa dibaca sekarang`,
-                icon: 'Sampul_Novel_7_Kesatria_Pelangi.png' // ganti pake sampul lo
+                icon: 'Sampul_Novel_7_Kesatria_Pelangi.png'
             });
         } else {
             status.textContent = 'Izin notifikasi ditolak. Nyalain manual di setting browser ya';
         }
     });
 
-    // Kalo ada chapter baru, langsung spam notif
-    const lastNotified = localStorage.getItem('lastNotifiedChapter');
-   const lastNotified = Number(localStorage.getItem('lastNotifiedChapter') || 0);
+    // Kalo ada chapter baru, langsung spam notif - UDAH GUE BENERIN
+    const lastNotified = Number(localStorage.getItem('lastNotifiedChapter') || 0);
 
-if (
-    localStorage.getItem('notifSubscribed') === 'true' &&
-    Notification.permission === 'granted' &&
-    lastNotified !== LATEST_CHAPTER
-) {
-    new Notification('Chapter Baru Nusa Antera!', {
-        body: `Chapter ${LATEST_CHAPTER}: Teman Sekamar & Mimpi Buruk udah rilis. Baca sekarang!`,
-        icon: 'Sampul_Novel_7_Kesatria_Pelangi.png'
-    });
-
-    localStorage.setItem('lastNotifiedChapter', LATEST_CHAPTER);
-}
-}
-
-// Jangan lupa panggil di DOMContentLoaded
-document.addEventListener('DOMContentLoaded', function() {
-    initDarkMode();
-    if (!isChapterPage()) {
-        initResumeButton();
-        initNotifChapter(); // ← TAMBAH INI
+    if (
+        localStorage.getItem('notifSubscribed') === 'true' &&
+        Notification.permission === 'granted' &&
+        lastNotified !== LATEST_CHAPTER
+    ) {
+        new Notification('Chapter Baru Nusa Antera!', {
+            body: `Chapter ${LATEST_CHAPTER}: Teman Sekamar & Mimpi Buruk udah rilis. Baca sekarang!`,
+            icon: 'Sampul_Novel_7_Kesatria_Pelangi.png'
+        });
+        localStorage.setItem('lastNotifiedChapter', LATEST_CHAPTER);
     }
-});
+}
