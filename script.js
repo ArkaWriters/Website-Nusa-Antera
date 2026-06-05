@@ -56,7 +56,7 @@ function initNotifChapter() {
     if (!btn) return;
 
     // GANTI ANGKA INI TIAP RILIS CHAPTER BARU
-    const LATEST_CHAPTER = 9; // Sekarang chapter 9. Nanti ganti jadi 10
+    const LATEST_CHAPTER = 6; // Sekarang chapter 6,
 
     // Cek status langganan
     if (localStorage.getItem('notifSubscribed') === 'true') {
